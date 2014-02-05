@@ -5,13 +5,15 @@ Template.passageItem.helpers({
 Template.passageItem.rendered = function() {
     Meteor.defer(function() {
 	$('.passage-content').lettering('words');
-	var passageId = $('.one-passage').attr('id');
-	data = Passages.findOne(passageId);
-	wordHighlights = data.wordHighlights;
-	wordHighlights.forEach(function(wordClass) {
-	    $('.' + wordClass).addClass('highlight');
-	});
-	console.log(wordHighlights);
+//	var passageId = $('.one-passage').attr('id');
+//	data = Passages.findOne(passageId);
+//	wordHighlights = data.wordHighlights;
+
+	console.log(this)
+//	this.wordHighlights.forEach(function(wordClass) {
+//	    $('.' + wordClass).addClass('highlight');
+//	});
+//	console.log(wordHighlights);
     });
 };
 

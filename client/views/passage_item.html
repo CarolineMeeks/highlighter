@@ -1,10 +1,9 @@
 <template name="passageItem">
   <div class="passage">
     <div class="one-passage" id="{{_id}}">
-      <h4><a href= "{{pathFor 'onePassage'}}">{{title}}</a></h4>
-      <div class="passage-content">
-	{{content}}
-      </div>
+      <h3>{{title}} <a href= "{{pathFor 'onePassage'}}">(Highlight)</a></h3> 
+<a href="{{pathFor 'viewPassage'}}">View Highlights</a></span></h3>
+
     </div>
   </div>
 </template>

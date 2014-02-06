@@ -1,5 +1,5 @@
 
-Everything in one collection
+Option 1: Everything in one collection
 
 Passage {
     title:
@@ -17,18 +17,22 @@ Passage {
     }
 }
 
-One collection for the passages and one for the user info
+
+
+Option 2: An even more compact way. However I think this involves sending students other students highlights and is thus not protective of PII.
 
 Passage {
     title:
     content:
     creating_user:
-    wordHighlight_counts: {
-	word1: 3,
-	word3: 1,
-	word5: 12
+    wordHighlights: {
+	word1: [user1, user3, user5]
+	word3: [user3]
+	word5: [user1, user2, user3, user5]
     }
 }
+
+Option 3: One collection for the passages and one for the user info
 
 UserHighlights {
     userId: user1,{

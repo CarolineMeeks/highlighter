@@ -4,6 +4,10 @@ Most Common
 - Student can see passage.content and passage.title and their highlights
 - Teacher can see heatmap of aggregate highlight
 
+Security requirements.
+- One student can not recieve another students userId or see what words a specific student has highlighted.
+
+
 Additional Features
 - Student can see aggerate heatmap.
 - Teacher can see individual students highlights.

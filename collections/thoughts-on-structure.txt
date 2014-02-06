@@ -1,11 +1,11 @@
 What we need to enable:
 
 Most Common
-- Student see's passage.content and passage.title and their highlights
-- Teacher see's heatmap of aggregate highlight
+- Student can see passage.content and passage.title and their highlights
+- Teacher can see heatmap of aggregate highlight
 
 Additional Features
-- Student see's aggerate heatmap.
+- Student can see aggerate heatmap.
 - Teacher can see individual students highlights.
 - Teacher can see a list of students who highlighted a specific word
 

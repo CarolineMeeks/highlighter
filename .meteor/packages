@@ -11,3 +11,5 @@ iron-router
 spin
 accounts-password
 coffeescript
+accounts-base
+accounts-guest

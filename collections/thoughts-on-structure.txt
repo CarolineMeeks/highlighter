@@ -1,0 +1,45 @@
+
+Everything in one collection
+
+Passage {
+    title:
+    content:
+    creating_user:
+    wordHighlight_counts: {
+	word1: 3,
+	word3: 1,
+	word5: 12
+    }
+    highlighting_user {
+	userId-1: [word1, word5],
+	userId-3: [word5],
+	userId-4: [word1, word3, word5]
+    }
+}
+
+One collection for the passages and one for the user info
+
+Passage {
+    title:
+    content:
+    creating_user:
+    wordHighlight_counts: {
+	word1: 3,
+	word3: 1,
+	word5: 12
+    }
+}
+
+UserHighlights {
+    userId: user1,{
+	passage: [passage1, {
+	    wordHighlights: [word1, word3, word5]
+	}]
+    }
+   userId: user2,{
+	passage: [passage1, {
+	    wordHighlights: [word3, word5]
+	}]
+    }
+}
+

@@ -3,9 +3,9 @@ Template.passageHighlight.helpers({
 });
 
 Template.passageHighlight.rendered = function() {
+    var passageId = this.data._id;
     Meteor.defer(function() {
 	$('.passage-content').lettering('words');
-	var passageId = $('.one-passage').attr('id');
 	data = Passages.findOne(passageId);
 	wordHighlights = data.wordHighlights;
 	wordHighlights.forEach(function(wordClass) {

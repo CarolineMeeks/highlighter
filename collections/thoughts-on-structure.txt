@@ -62,3 +62,23 @@ UserHighlights {
     }
 }
 
+
+
+Option 4: A slight variation in Option 3 that is less higharchtical,where userId _ PassageId are unique, because I don not know how to update Option 3.
+
+UserHighlights {
+    userId: user1,
+    passage: [passage1, 
+    wordHighlights: [word1, word3, word5]
+	     },
+    {
+    userId: user2,
+    passage: passage1, 
+    wordHighlights: [word3, word5]
+    },
+    {
+    userId: user2,
+    passage: passage2,
+    wordHighlights: [word1, word 7]
+}
+

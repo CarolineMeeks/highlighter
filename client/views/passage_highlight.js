@@ -3,15 +3,15 @@ Template.passageHighlight.helpers({
 });
 
 Template.passageHighlight.rendered = function() {
+    Meteor.loginVisitor();
     var passageId = this.data._id;
     Meteor.defer(function() {
 	$('.passage-content').lettering('words');
-	data = Passages.findOne(passageId);
-	wordHighlights = data.wordHighlights;
-	wordHighlights.forEach(function(wordClass) {
+	var userHighlight = UserHighlights.findOne({userId: Meteor.userId()}, {passageId: passageId});
+	wordsToHighlight = userHighlight.wordsHighlighted;
+	wordsToHighlight.forEach(function(wordClass) {
 	    $('.' + wordClass).addClass('highlight');
 	});
-	console.log(wordHighlights);
     });
 };
 
@@ -28,10 +28,10 @@ Template.passageHighlight.events({
 
 	    if ($(e.target).hasClass('highlight')) {
 		$(e.target).removeClass('highlight');
-		Meteor.call('highlight', word_class, passageId, 'remove');
+		Meteor.call('highlight', word_class, passageId, Meteor.userId(), 'remove');
 	    } else {
 		$(e.target).addClass('highlight');
-		Meteor.call('highlight', word_class, passageId, 'add');
+		Meteor.call('highlight', word_class, passageId, Meteor.userId(), 'add');
 	    };
 	};
     }

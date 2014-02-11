@@ -4,7 +4,7 @@ Template.passageHighlight.helpers({
 
 Template.passageHighlight.rendered = function() {
     var passageId = this.data._id;
-    console.log('passageId '+ passageId);
+    console.log('Just rendered passageId '+ passageId);
 
     Meteor.defer(function() {
 	$('.passage-content').lettering('words');
@@ -40,9 +40,8 @@ Template.passageHighlight.events({
 	passageId = this._id;
 	var classes =  $(e.target).attr("class");
 	if (classes != 'passage-content') { //FIXMEsometimes the click doesn't seem to get a span
-	    console.log(classes)
             word_class = re.exec(classes)[0];
-	    console.log(' regex got  ' + word_class + ' passageId ' + passageId);
+	    console.log(' word_class is  ' + word_class + ' passageId ' + passageId);
 
 	    if ($(e.target).hasClass('highlight')) {
 		$(e.target).removeClass('highlight');

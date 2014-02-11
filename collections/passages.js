@@ -10,8 +10,7 @@ Meteor.methods({
 	if (!passage) {
 	    throw new Meteor.Error(422, 'Post not found');
 	}
-
-	var userHighlight = UserHighlights.findOne({userId: userId}, {passageId: passage._id});
+	var userHighlight = UserHighlights.findOne({userId: userId, passageId: passageId});
 
 	console.log('got userHighlight ', userHighlight);
 	if (!userHighlight) {

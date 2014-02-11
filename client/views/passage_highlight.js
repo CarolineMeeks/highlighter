@@ -3,11 +3,29 @@ Template.passageHighlight.helpers({
 });
 
 Template.passageHighlight.rendered = function() {
-    Meteor.loginVisitor();
     var passageId = this.data._id;
+    console.log('passageId '+ passageId);
+
     Meteor.defer(function() {
 	$('.passage-content').lettering('words');
-	var userHighlight = UserHighlights.findOne({userId: Meteor.userId()}, {passageId: passageId});
+
+	var userId = Meteor.userId();
+	if (!userId) {
+	    //loginVisitor is now in the layout so hopefully it will exist by now.
+	    console.log('WARNING: userId is null ' + userId);
+	    //failure mode is the first highlight fails so I'm not going to kill it but if this shows up I should fix it.
+	}
+
+    var userHighlight = UserHighlights.findOne({userId: userId, passageId: passageId});
+    console.log('got userHighlight ', userHighlight);  
+    if (!userHighlight) {
+	//Assumption here is user is created but this is the first time they have highlighted.
+	console.log('about to insert into UserHighlights');
+	UserHighlights.insert({userId: userId, passageId: passageId, wordsHighlighted: []});
+	userHighlight = UserHighlights.findOne({userId: userId, passageId: passageId});
+	console.log('new userHighlight ', userHighlight);  
+    };
+
 	wordsToHighlight = userHighlight.wordsHighlighted;
 	wordsToHighlight.forEach(function(wordClass) {
 	    $('.' + wordClass).addClass('highlight');

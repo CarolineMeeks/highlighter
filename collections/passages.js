@@ -6,7 +6,7 @@ Meteor.methods({
     highlight: function(word_class, passageId, userId, action) {
 	console.log('starting highlight ' + word_class + action + ' passageId ' + passageId + ' userId: ' + userId);
 	var passage = Passages.findOne(passageId);
-	console.log('got passage');
+	console.log('got passage ' + passage);
 	if (!passage) {
 	    throw new Meteor.Error(422, 'Post not found');
 	}
@@ -15,9 +15,9 @@ Meteor.methods({
 
 	console.log('got userHighlight ', userHighlight);
 	if (!userHighlight) {
-	    //Assumption here is user is created but this is the first time they have highlighted.
+	    //Assumption here is user is created but this is the first time they have highlighted. I moved this code to the passage_highlight render so it can probably be deleted here.
 	    console.log('about to insert into UserHighlights');
-	    userHighlight = UserHighlights.insert({userId: userId, PassageId: passage._id, wordsHighlighted: []});
+	    userHighlight = UserHighlights.insert({userId: userId, passageId: passage._id, wordsHighlighted: []});
 	};
 
 	console.log(action + word_class);

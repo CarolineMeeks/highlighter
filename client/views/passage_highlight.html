@@ -1,12 +1,19 @@
 <template name="passageHighlight">
-
-  <div class="passage">
-    <div class="one-passage">
+  <div class="row"> 
+    <div class="col-md-10">
       <h4><a href= "{{pathFor 'onePassage'}}">{{title}}</a></h4>
-      <div class="passage-content">
-	{{content}}
-      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-10" id= "passage-content">
+      {{content}}
+    </div>
+    <div class="col-md-2" id= "highlight-sidebar">
+      <div id="highlighters">
+	<button class="btn btn-yellow btn-block active" data-toggle="button" id="yellow"> Highlight</button>
+	<button id="erase" class="btn btn-erase btn-block" data-toggle="button"> Erase</button>
+      </ul>
     </div>
   </div>
-
 </template>

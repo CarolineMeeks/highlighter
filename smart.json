@@ -1,9 +1,9 @@
 {
   "packages": {
-      "jquery-mobile": {
-	  "git": "https://github.com/Pyo25/meteor-jquery-mobile.git"
-      },
-      "accounts-guest": {}
-
+    "jquery-mobile": {
+      "git": "https://github.com/Pyo25/meteor-jquery-mobile.git"
+    },
+    "accounts-guest": {},
+    "bootstrap-3": {}
   }
 }

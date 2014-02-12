@@ -15,8 +15,12 @@ body {
   background: #eee;
   color: #666666; }
 
-.passage-content {
+#passage-content {
    cursor: url(https://cdn1.iconfinder.com/data/icons/ledicons/highlighter.png), -moz-zoom-in;
+}
+
+#passage-content.erase {
+    cursor: url(https://cdn1.iconfinder.com/data/icons/fugue/icon/eraser-small.png), -moz-zoom-in;
 }
 
 .highlight {
@@ -69,3 +73,14 @@ body {
     float: right;
     margin-top: 7px; }
 
+.btn-yellow {
+    color: grey;
+    background-color: yellow;
+    border-color: #eea236;
+}
+
+.btn-erase {
+    color: #fff;
+    background-color: green;
+    border-color: #eea236;
+}

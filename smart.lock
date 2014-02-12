@@ -6,7 +6,8 @@
         "git": "https://github.com/Pyo25/meteor-jquery-mobile.git",
         "branch": "master"
       },
-      "accounts-guest": {}
+      "accounts-guest": {},
+      "bootstrap-3": {}
     },
     "packages": {
       "jquery-mobile": {
@@ -18,6 +19,11 @@
         "git": "https://github.com/artwells/meteor-accounts-guest.git",
         "tag": "v0.0.6",
         "commit": "f40bcf1f9e5999c70ab81a4f1e7a39f3ce78aa57"
+      },
+      "bootstrap-3": {
+        "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
+        "tag": "v3.1.0-1",
+        "commit": "329dccb08bfc18c635676dea600ac9953162cda9"
       }
     }
   }

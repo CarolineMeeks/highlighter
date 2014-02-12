@@ -4,10 +4,14 @@ Template.passageHighlight.helpers({
 
 Template.passageHighlight.rendered = function() {
     var passageId = this.data._id;
+    Session.set('passageId', passageId);
+    if (Session.get('highlighter') == 'erase') { 
+	$('#passage-content').addClass('erase');
+    }
     console.log('Just rendered passageId '+ passageId);
 
     Meteor.defer(function() {
-	$('.passage-content').lettering('words');
+	$('#passage-content').lettering('words');
 
 	var userId = Meteor.userId();
 	if (!userId) {
@@ -35,43 +39,53 @@ Template.passageHighlight.rendered = function() {
 
 
 Template.passageHighlight.events({
-    'mousedown div.passage-content': function(e) {
+    'click #highlighters': function(e) {
+
+	if ($(e.target).attr('id') == 'erase') {
+	    Session.set('highlighter', 'erase');
+	    $('#passage-content').addClass('erase');
+	    
+	} else if ($(e.target).attr('id') == 'yellow') {
+	    Session.set('highlighter', 'yellow');  //add other highlighter colors later
+	    $('#passage-content').removeClass('erase');
+	};
+	console.log('clicked highlighters ' + Session.get('highlighter'));
+    },
+    'mousedown div#passage-content': function(e) {
 	e.preventDefault();
 	Session.set('dragging', true);
 	console.log('drag starts');
 	mark(e);
     },
-    'mousemove div.passage-content': function(e){
+    'mousemove div#passage-content': function(e){
 	if (Session.get('dragging') == true) {mark(e)};
     },
-    'mouseup': function(e){
+    'mouseup div#passage-content': function(e){
 	if (Session.get('dragging') == true) {
 	};
 	Session.set('dragging', false)  ;
 	console.log('drag stops');
-    },
- 
-   'click div.passage-content': function(e) {
-	re = new RegExp("word[0-9]*")
-	passageId = this._id;
-	var classes =  $(e.target).attr("class");
-	if (classes != 'passage-content') { //FIXMEsometimes the click doesn't seem to get a span
-            word_class = re.exec(classes)[0];
-	    console.log(' word_class is  ' + word_class + ' passageId ' + passageId);
-
-
-	    if ($(e.target).hasClass('highlight')) {
-		$(e.target).removeClass('highlight');
-		Meteor.call('highlight', word_class, passageId, Meteor.userId(), 'remove');
-	    } else {
-		$(e.target).addClass('highlight');
-		Meteor.call('highlight', word_class, passageId, Meteor.userId(), 'add');
-	    };
-	};
     }
 });
 
 function mark(e) {
     console.log('mark called');
+    var action = 'add'
+    if (Session.get('highlighter') == 'erase') { 
+	action = 'remove';
+    };
+    re = new RegExp("word[0-9]*");
+    passageId = Session.get('passageId');
+    var classes =  $(e.target).attr("class");
+    if ($(e.target).is('div')) { 
+	//FIXMEsometimes the click doesn't seem to get a span
+    } else {
+	word_class = re.exec(classes)[0];
+	console.log(' word_class is  ' + word_class + ' passageId ' + passageId);
+
+	Meteor.call('highlight', word_class, passageId, Meteor.userId(), action);
+	
+    };
 };
+
 

@@ -6,7 +6,6 @@
 standard-app-packages
 insecure
 preserve-inputs
-bootstrap
 iron-router
 spin
 accounts-password
@@ -15,3 +14,4 @@ accounts-base
 accounts-guest
 underscore
 d3
+bootstrap-3

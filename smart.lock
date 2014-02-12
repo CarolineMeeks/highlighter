@@ -2,9 +2,18 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
+      "jquery-mobile": {
+        "git": "https://github.com/Pyo25/meteor-jquery-mobile.git",
+        "branch": "master"
+      },
       "accounts-guest": {}
     },
     "packages": {
+      "jquery-mobile": {
+        "git": "https://github.com/Pyo25/meteor-jquery-mobile.git",
+        "branch": "master",
+        "commit": "8f19f227883d14ba05def7b0c7a1a8aeeda55ece"
+      },
       "accounts-guest": {
         "git": "https://github.com/artwells/meteor-accounts-guest.git",
         "tag": "v0.0.6",

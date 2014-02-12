@@ -35,13 +35,30 @@ Template.passageHighlight.rendered = function() {
 
 
 Template.passageHighlight.events({
-    'click div.passage-content': function(e) {
+    'mousedown div.passage-content': function(e) {
+	e.preventDefault();
+	Session.set('dragging', true);
+	console.log('drag starts');
+	mark(e);
+    },
+    'mousemove div.passage-content': function(e){
+	if (Session.get('dragging') == true) {mark(e)};
+    },
+    'mouseup': function(e){
+	if (Session.get('dragging') == true) {
+	};
+	Session.set('dragging', false)  ;
+	console.log('drag stops');
+    },
+ 
+   'click div.passage-content': function(e) {
 	re = new RegExp("word[0-9]*")
 	passageId = this._id;
 	var classes =  $(e.target).attr("class");
 	if (classes != 'passage-content') { //FIXMEsometimes the click doesn't seem to get a span
             word_class = re.exec(classes)[0];
 	    console.log(' word_class is  ' + word_class + ' passageId ' + passageId);
+
 
 	    if ($(e.target).hasClass('highlight')) {
 		$(e.target).removeClass('highlight');
@@ -54,4 +71,7 @@ Template.passageHighlight.events({
     }
 });
 
+function mark(e) {
+    console.log('mark called');
+};
 

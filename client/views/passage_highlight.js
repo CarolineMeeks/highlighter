@@ -8,9 +8,8 @@ Template.passageHighlight.rendered = function() {
     if (Session.get('highlighter') == 'erase') { 
 	$('#passage-content').addClass('erase');
     }
-    console.log('Just rendered passageId '+ passageId);
-
     Meteor.defer(function() {
+//	$('#passage-content').attr('unselectable', 'on').css('user-select', 'none').on('selectstart', false);
 	$('#passage-content').lettering('words');
 
 	var userId = Meteor.userId();
@@ -21,13 +20,12 @@ Template.passageHighlight.rendered = function() {
 	}
 
     var userHighlight = UserHighlights.findOne({userId: userId, passageId: passageId});
-    console.log('got userHighlight ', userHighlight);  
+
     if (!userHighlight) {
 	//Assumption here is user is created but this is the first time they have highlighted.
-	console.log('about to insert into UserHighlights');
+
 	UserHighlights.insert({userId: userId, passageId: passageId, wordsHighlighted: []});
 	userHighlight = UserHighlights.findOne({userId: userId, passageId: passageId});
-	console.log('new userHighlight ', userHighlight);  
     };
 
 	wordsToHighlight = userHighlight.wordsHighlighted;
@@ -39,7 +37,7 @@ Template.passageHighlight.rendered = function() {
 
 
 Template.passageHighlight.events({
-    'click #highlighters': function(e) {
+    'tap, click #highlighters': function(e) {
 
 	if ($(e.target).attr('id') == 'erase') {
 	    Session.set('highlighter', 'erase');
@@ -51,25 +49,28 @@ Template.passageHighlight.events({
 	};
 	console.log('clicked highlighters ' + Session.get('highlighter'));
     },
-    'mousedown div#passage-content': function(e) {
-	e.preventDefault();
+    'touchstart, vmousedown, mousedown div#passage-content': function(e) {
 	Session.set('dragging', true);
-	console.log('drag starts');
+	console.log('drag starts, mouse down' + e.type);
 	mark(e);
+	e.preventDefault();
     },
-    'mousemove div#passage-content': function(e){
+    'touchmove, vmousemove, mousemove div#passage-content': function(e){
+	console.log('mousemove ' + e.type);
 	if (Session.get('dragging') == true) {mark(e)};
+	e.preventDefault();
     },
-    'mouseup div#passage-content': function(e){
+    'touchend, vmouseup, mouseup div#passage-content': function(e){
+	console.log('mouseup! ' + e.type)
 	if (Session.get('dragging') == true) {
 	};
 	Session.set('dragging', false)  ;
 	console.log('drag stops');
+	e.preventDefault();
     }
 });
 
 function mark(e) {
-    console.log('mark called');
     var action = 'add'
     if (Session.get('highlighter') == 'erase') { 
 	action = 'remove';
@@ -77,15 +78,12 @@ function mark(e) {
     re = new RegExp("word[0-9]*");
     passageId = Session.get('passageId');
     var classes =  $(e.target).attr("class");
-    if ($(e.target).is('div')) { 
-	//FIXMEsometimes the click doesn't seem to get a span
-    } else {
-	word_class = re.exec(classes)[0];
-	console.log(' word_class is  ' + word_class + ' passageId ' + passageId);
+    word_classes = re.exec(classes);
+    console.log('mark called word classes ' + word_classes);
+    if (word_classes) {   //Sometimes you are on a space not a word so you get no word classes
+	word_class = word_classes[0];
 
 	Meteor.call('highlight', word_class, passageId, Meteor.userId(), action);
 	
     };
 };
-
-

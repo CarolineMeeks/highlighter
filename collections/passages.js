@@ -19,15 +19,17 @@ Meteor.methods({
 	    userHighlight = UserHighlights.insert({userId: userId, passageId: passage._id, wordsHighlighted: []});
 	};
 
-	console.log(action + word_class);
+	wordIndex =  userHighlight.wordsHighlighted.indexOf(word_class); //-1 if not in the array, use this to check for doublclicks.
+
+	console.log('acation' + action + word_class + ' index ' + wordIndex);
 	var incWordClass = {};
 
-	if (action == 'add') {
+	if (action == 'add' && wordIndex == -1) {
 	    incWordClass[word_class] = 1
-	    console.log('about to add highlight');
+	    console.log('about to add highlight to userHighlights ' + userHighlight._id);
 	    Passages.update(passage._id, {$inc: incWordClass});
-	    UserHighlights.update(userHighlight._id, {$push: {wordsHighlighted: word_class}});
-	} else if (action == 'remove') {
+	    UserHighlights.update(userHighlight._id, {$addToSet: {wordsHighlighted: [word_class]}});
+	} else if (action == 'remove' && wordIndex >= 0) {
 	    incWordClass[word_class] = -1
 	    console.log('about to remove');
 	    Passages.update(passage._id, {$inc: incWordClass});

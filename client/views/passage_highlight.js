@@ -27,10 +27,11 @@ Template.passageHighlight.rendered = function() {
 	UserHighlights.insert({userId: userId, passageId: passageId, wordsHighlighted: []});
 	userHighlight = UserHighlights.findOne({userId: userId, passageId: passageId});
     };
-
+	
 	wordsToHighlight = userHighlight.wordsHighlighted;
 	wordsToHighlight.forEach(function(wordClass) {
 	    $('.' + wordClass).addClass('highlight');
+	    console.log('highlight ' + wordClass);
 	});
     });
 };
@@ -79,7 +80,7 @@ function mark(e) {
     passageId = Session.get('passageId');
     var classes =  $(e.target).attr("class");
     word_classes = re.exec(classes);
-    console.log('mark called word classes ' + word_classes);
+    console.log('mark called word classes ' + classes);
     if (word_classes) {   //Sometimes you are on a space not a word so you get no word classes
 	word_class = word_classes[0];
 

@@ -11,20 +11,17 @@ Template.passageHeatMap.rendered = function() {
 
 	var passage = Passages.findOne(passageId);
 	var freq = []
-	$('.passage-content').find("span").each( function(index) {
-	    word = 'word'+(index+1);
+	var colorArray = ['rgb(247,251,255)','rgb(222,235,247)','rgb(198,219,239)','rgb(158,202,225)','rgb(107,174,214)','rgb(66,146,198)'];
+	var numColors = colorArray.length;
+	$('#passage-content').find("span").each( function(index) {
+	    word = 'word'+(index);
 	    var count = passage[word];
 	    if (!count) { count = 0 }
 	    freq.push(count)
-	    if (count >= 1) {
-		d3.select('.'+word).transition().delay(500).style('background-color','cyan');
-		if (count >= 2) {
-		    d3.select('.'+word).transition().delay(1000).style('color','red');
-		    if (count >= 3) {
-			d3.select('.'+word).transition().delay(1500).style('font-size','150%');
-		    }		
-		}
-	    }
+	    if (count >=1 && count <= numColors) {  //FIXME: Hacking color map
+		d3.select('.'+word).transition().delay(500).style('background-color',colorArray[numColors-count]);
+
+	    }		
 	    console.log('looping through a span..' + word + $(this).text() + count);
 	});
     });

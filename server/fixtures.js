@@ -1,7 +1,7 @@
 if (Passages.find().count() === 0) {
     Passages.insert({
 	title: 'The Song of Wandering Aengus BY WILLIAM BUTLER YEATS',
-	content: 'I went out to the hazel wood,'
+	content: "<span class='word0'>I</span><span class='word1'>went</span><span class='word2'>out</span><span class='word3'>to</span><span class='word4'>the</span><span class='word5'>hazel</span><span class='word6'>wood</span>"
     });
 
     Passages.insert({

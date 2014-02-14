@@ -10,7 +10,7 @@ Template.passageHighlight.rendered = function() {
     }
     Meteor.defer(function() {
 //	$('#passage-content').attr('unselectable', 'on').css('user-select', 'none').on('selectstart', false);
-	$('#passage-content').lettering('words');
+//	$('#passage-content').lettering('words');
 
 	var userId = Meteor.userId();
 	if (!userId) {

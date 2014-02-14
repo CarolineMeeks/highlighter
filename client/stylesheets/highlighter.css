@@ -83,3 +83,7 @@ body {
     background-color: green;
     border-color: #eea236;
 }
+
+span {
+    padding: 2px;
+}

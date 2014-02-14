@@ -28,14 +28,12 @@ Meteor.methods({
 	    incWordClass[word_class] = 1
 	    console.log('about to add highlight to userHighlights ' + userHighlight._id);
 	    Passages.update(passage._id, {$inc: incWordClass});
-	    UserHighlights.update(userHighlight._id, {$addToSet: {wordsHighlighted: [word_class]}});
+	    UserHighlights.update(userHighlight._id, {$addToSet: {wordsHighlighted: word_class}});
 	} else if (action == 'remove' && wordIndex >= 0) {
 	    incWordClass[word_class] = -1
 	    console.log('about to remove');
 	    Passages.update(passage._id, {$inc: incWordClass});
 	    UserHighlights.update(userHighlight._id, {$pull: {wordsHighlighted: word_class}});
-	} else {
-	    throw new Meteor.Error(422, 'action not add or remove');
 	};    
     }
 });

@@ -1,7 +1,7 @@
 
 Template.passagesList.helpers({
   passages: function() {
-      return Passages.find()
+      return Passages.find({}, {sort: {submitted: -1}});
   }
 });
 

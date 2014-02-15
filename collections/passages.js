@@ -45,8 +45,33 @@ Meteor.methods({
 	if (!passageAttributes.prompt)
 	    throw new Meteor.Error(422, 'Please fill in a prompt');
 
+	function nl2br (str, is_xhtml) {   
+	    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';    
+	    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
+	}
+
+	c = nl2br(passageAttributes.passage, false);
+	console.log(" c " + c);
+	function injector(t, splitter, klass, after) {
+	    var a = t.split(splitter);
+	    var result = ""
+	    if (a.length) {
+		for (var i=0; i<a.length;i++) {
+		    item = a[i];
+		    if (item.length) {
+			result = result + '<span class="'+klass+(i+1)+'">'+item+'</span>'+after;
+		    }
+		}
+	    }
+	    return result
+	}
+
+	content = injector(c,' ', 'word','');
+	console.log(content);
+
 	//Put the spans etc in here.
-	var passage = _.extend(_.pick(passageAttributes, 'prompt', 'title', 'passage', 'userId'), {
+	var passage = _.extend(_.pick(passageAttributes, 'prompt', 'title', 'userId'), {
+	    content: content,
 	    submitted: new Date().getTime()
 	});
 

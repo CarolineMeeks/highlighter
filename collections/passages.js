@@ -35,5 +35,23 @@ Meteor.methods({
 	    Passages.update(passage._id, {$inc: incWordClass});
 	    UserHighlights.update(userHighlight._id, {$pull: {wordsHighlighted: word_class}});
 	};    
+    },
+    'submit': function(passageAttributes) {
+
+	if (!passageAttributes.title)
+	    throw new Meteor.Error(422, 'Please fill in a title');
+	if (!passageAttributes.passage)
+	    throw new Meteor.Error(422, 'Please fill in a passage');
+	if (!passageAttributes.prompt)
+	    throw new Meteor.Error(422, 'Please fill in a prompt');
+
+	//Put the spans etc in here.
+	var passage = _.extend(_.pick(passageAttributes, 'prompt', 'title', 'passage', 'userId'), {
+	    submitted: new Date().getTime()
+	});
+
+	var passageId = Passages.insert(passage);
+
+	return passageId;
     }
 });

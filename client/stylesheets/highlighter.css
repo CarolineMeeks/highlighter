@@ -26,14 +26,14 @@ body {
 }
 
 #passage-content {
-   cursor: url(https://cdn1.iconfinder.com/data/icons/ledicons/highlighter.png), -moz-zoom-in;
+    cursor: text
 }
 #passage {
  padding: 10px;
 }
 
 #passage-content.erase {
-    cursor: url(https://cdn1.iconfinder.com/data/icons/fugue/icon/eraser-small.png), -moz-zoom-in;
+    cursor: url(https://cdn1.iconfinder.com/data/icons/fugue/icon/eraser-small.png) 0 10, move;
 }
 
 .highlight {

@@ -66,7 +66,7 @@ Meteor.methods({
 	    return result
 	}
 
-	content = injector(c,' ', 'word','');
+	content = injector(c,' ', 'word','<wbr>');
 	console.log(content);
 
 	//Put the spans etc in here.

@@ -3,17 +3,18 @@
   <div class="row"> 
     <div class="col-md-10">
       <h4><a href= "{{pathFor 'onePassage'}}">{{title}}</a></h4>
-    </div>
-    <div class="col-md-2"></div>
-  </div>
-  <div class="row">
-    <div class="col-md-10" id= "passage-content">
+      <div id="passage-content">
       {{{content}}}
+      </div>
     </div>
+
     <div class="col-md-2" id= "highlight-sidebar">
+	  {{prompt}}
+	  <p>
       <div id="highlighters">
 	<button class="btn btn-yellow btn-block active" id="yellow"> Highlight</button>
 	<button id="erase" class="btn btn-erase btn-block"> Erase</button>
+
       </ul>
     </div>
   </div>

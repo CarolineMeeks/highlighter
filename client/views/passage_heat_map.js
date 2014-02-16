@@ -18,11 +18,18 @@ Template.passageHeatMap.rendered = function() {
 	    var count = passage[word];
 	    if (!count) { count = 0 }
 	    freq.push(count)
-	    if (count >=1 && count <= numColors) {  //FIXME: Hacking color map
-		d3.select('.'+word).transition().delay(500).style('background-color',colorArray[numColors-count]);
-
-	    }		
-	    console.log('looping through a span..' + word + $(this).text() + count);
+	});
+	maxFreq = _.max(freq);
+	console.log('max freq', freq, maxFreq);
+	$('#passage-content').find("span").each( function(index) {
+	    word = 'word'+(index);
+	    var count = passage[word];
+	    if (count >=1) {  
+		var level = (((maxFreq - count)/maxFreq) * numColors).toFixed();
+		console.log('setting',word, level);
+		d3.select('.'+word).transition().delay(500).style('background-color',colorArray[level]);
+		Tipped.create('.'+word, count);
+	    }
 	});
     });
 };

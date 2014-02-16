@@ -39,7 +39,7 @@ Template.passageHighlight.rendered = function() {
 
 Template.passageHighlight.events({
     'tap, click #highlighters': function(e) {
-
+	Session.set('dragging', false)  ;
 	if ($(e.target).attr('id') == 'erase') {
 	    Session.set('highlighter', 'erase');
 	    $('#passage-content').addClass('erase');
@@ -61,10 +61,8 @@ Template.passageHighlight.events({
 	if (Session.get('dragging') == true) {mark(e)};
 	e.preventDefault();
     },
-    'touchend, vmouseup, mouseup div#passage-content': function(e){
+    'touchend, vmouseup, mouseup body': function(e){
 	console.log('mouseup! ' + e.type)
-	if (Session.get('dragging') == true) {
-	};
 	Session.set('dragging', false)  ;
 	console.log('drag stops');
 	e.preventDefault();

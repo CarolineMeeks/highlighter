@@ -92,6 +92,12 @@ body {
     border-color: #eea236;
 }
 
+.btn-cyan {
+    color: grey;
+    background-color: cyan;
+    border-color: #eea236;
+}
+
 .btn-erase {
     color: #fff;
     background-color: green;

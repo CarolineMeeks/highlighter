@@ -1,14 +1,14 @@
 <template name="passageHighlight">
   <div class="passage">
   <div class="row"> 
-    <div class="col-md-10">
+    <div class="col-md-10 col-sm-9">
       <h4><a href= "{{pathFor 'onePassage'}}">{{title}}</a></h4>
       <div id="passage-content">
       {{{content}}}
       </div>
     </div>
 
-    <div class="col-md-2" id= "highlight-sidebar">
+    <div class="col-md-2 col-sm-3" id= "highlight-sidebar">
 	  {{prompt}}
 	  <p>
       <div id="highlighters">

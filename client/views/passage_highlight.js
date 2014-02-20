@@ -3,6 +3,20 @@ Template.passageHighlight.helpers({
 });
 
 Template.passageHighlight.rendered = function() {
+    var countTouch = 0
+    document.body.onmouseup = function() {
+	console.log('body mouse up');
+	Session.set('dragging', false)  ;
+    };
+    if ( $.mobile ) {
+	console.log('loaded');
+    } else {
+	console.log('not');
+    };
+
+//    $("#highlighters").bind("vmousemove", function(evt){
+//	console.log('vmousemove on highlighters');
+//    });
     var passageId = this.data._id;
     Session.set('passageId', passageId);
     if (Session.get('highlighter') == 'erase') { 
@@ -31,7 +45,6 @@ Template.passageHighlight.rendered = function() {
 	wordsToHighlight = userHighlight.wordsHighlighted;
 	wordsToHighlight.forEach(function(wordClass) {
 	    $('.' + wordClass).addClass('highlight');
-	    console.log('highlight ' + wordClass);
 	});
     });
 };
@@ -44,28 +57,42 @@ Template.passageHighlight.events({
 	    Session.set('highlighter', 'erase');
 	    $('#passage-content').addClass('erase');
 	    
-	} else if ($(e.target).attr('id') == 'yellow') {
-	    Session.set('highlighter', 'yellow');  //add other highlighter colors later
+	} else if ($(e.target).attr('id') == 'cyan') {
+	    Session.set('highlighter', 'cyan');  //add other highlighter colors later
 	    $('#passage-content').removeClass('erase');
 	};
 	console.log('clicked highlighters ' + Session.get('highlighter'));
     },
-    'touchstart, vmousedown, mousedown div#passage-content': function(e) {
+    'mouseup span.mark': function(e){
+	console.log('mouseup! ' + e.type)
+	Session.set('dragging', false)  ;
+	console.log('drag stops');
+	e.preventDefault();
+    },
+    'touchstart, vmousedown, mousedown span.mark': function(e) {
 	Session.set('dragging', true);
 	console.log('drag starts, mouse down' + e.type);
 	mark(e);
 	e.preventDefault();
     },
-    'touchmove, vmousemove, mousemove div#passage-content': function(e){
-	console.log('mousemove ' + e.type);
+    'mousemove span.mark': function(e){
+	console.log('mousemove ');
 	if (Session.get('dragging') == true) {mark(e)};
 	e.preventDefault();
     },
-    'touchend, vmouseup, mouseup body': function(e){
-	console.log('mouseup! ' + e.type)
-	Session.set('dragging', false)  ;
-	console.log('drag stops');
+    'touchmove span.mark': function(e){
+	console.log('touchmove');
 	e.preventDefault();
+	countTouch = countTouch + 1;
+	if (countTouch >= 10) {
+	    debugger;
+	}
+    },
+    'vmousemove span.mark': function(e){
+	console.log('vmousemove');
+    },
+    'swipe span':function(e){
+	console.log('swipe',e)
     }
 });
 

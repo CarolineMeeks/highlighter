@@ -11,7 +11,7 @@ Template.passageHeatMap.rendered = function() {
 
 	var passage = Passages.findOne(passageId);
 	var freq = []
-	var colorArray = ['rgb(247,251,255)','rgb(222,235,247)','rgb(198,219,239)','rgb(158,202,225)','rgb(107,174,214)','rgb(66,146,198)'];
+	var colorArray = ['cyan','rgb(222,235,247)','rgb(198,219,239)','rgb(158,202,225)','rgb(107,174,214)','rgb(66,146,198)'];
 	var numColors = colorArray.length;
 	$('#passage-content').find("span").each( function(index) {
 	    word = 'word'+(index);
@@ -28,7 +28,7 @@ Template.passageHeatMap.rendered = function() {
 		var level = (((maxFreq - count)/maxFreq) * numColors).toFixed();
 		console.log('setting',word, level);
 		d3.select('.'+word).transition().delay(500).style('background-color',colorArray[level]);
-		Tipped.create('.'+word, count);
+//		Tipped.create('.'+word, count);
 	    }
 	});
     });

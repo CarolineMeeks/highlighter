@@ -31,6 +31,35 @@ Template.passageHeatMap.rendered = function() {
 //		Tipped.create('.'+word, count);
 	    }
 	});
+	console.log(colorArray.length, maxFreq);
+	var binMax = maxFreq;
+	var binMin = binMax;
+	var level = 0;
+	var text = ""
+	for (var c = maxFreq; c > 0; c-- ) {
+	    binMin = c;
+	    console.log('c',c);
+	    cLevel =  (((maxFreq - c)/maxFreq) * numColors).toFixed();
+	    	    console.log('cLevel',cLevel);
+	    if (level !== cLevel) {
+		if (c < binMax - 1) {
+		    binMin = c + 1;
+		}
+		if (binMin == binMax) {
+		    text = binMax + ' Highlights';
+		} else {
+		    text = binMax + ' to ' + binMin + ' Highlights';
+		}
+		    console.log(colorArray[level]);
+		 $('#legend').append($('<div class="legend">').css('background-color', colorArray[cLevel]).append(text));
+		binMax = c-1;
+		level = cLevel;
+
+	    };
+	    
+	    console.log('after if');
+	};
+	$('#legend').append($('<div class="legend">').append('No Highlights'));
     });
 };
 

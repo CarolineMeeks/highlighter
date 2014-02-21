@@ -132,3 +132,7 @@ span {
   margin-left: auto;
   margin-right: auto;
 }
+
+.legend {
+    padding: 3px;
+}

@@ -1,0 +1,45 @@
+<template name="about">
+ <div class="passage">
+<div class="col-md-10">
+<h2>Highlighter: Quick in-class formative assessment and discussion aid</h2>
+
+<h3>Context</h3>
+This is designed quick formative assessmetn in a middle school classroom using laptop or tablets.  
+
+Teachers paste a short passage into the browser and a prompt instructing students what to highlight.  Students spend a couple minutes highlighting and the teacher projects a heatmap of the results.  The heatmap provides the teacher with instant feedback as to how well the class is performing on the task. It also serves as a starting point for class discussion.
+<blockquote>
+<a href="http://highlighter.meteor.com/passage-view/RQCLHn7pGXbRDXH5u">Example Heatmap</a><p>
+<a href="http://highlighter.meteor.com/passages/RQCLHn7pGXbRDXH5u">Add your highlights</a>
+</blockquote>
+<h3> Technology for weak wifi environments</h3>
+One of the problems with technology in schools is poor wifi connections.  In many schools devices drop connection frequently.
+<p>
+This website is a protype to test a new web technology called <a href="https://www.meteor.com/">Meteor</a>.  This technology 'bakes in' some offline capabiity.  There is a copy of the database, with just their data, in the browser. When the student clicks on a word to highlight it, the database action is done right on their browser. When the student is connected it is also sent to the server. If the student loses connection Meteor is supposed to be smart about what has been sent and automatically appropriately update the server.
+<p>
+What does this mean for this app?
+<p>
+The student can highlight the passage without any lag even in slow internet.  
+The teacher's "view highlights" view updates automatically as data comes in.  Highlights show up immediately with fast internet and take a some seconds with slower internet. But student work is not delayed.
+<p>
+If the student loses internet connection for a couple of minutes and thier device reconnects they can keep working while offline and their highlights are sent to the server.
+<h3>Backlog</h3>
+This is a quick prototype, not a finished product there are quite a few more things that could be added.
+
+<ul>
+<li> Improved highlighting experience on iPad...its a bit rough right now.
+<li> Click on a word and see how many students have highlighted it.
+<li> Short urls (bit.ly, is.gd) to make it fast for a teacher to write the ulr on the board and stuents to type it in.
+<li> Hide teacher's passages if desired.
+<li> Improved design
+<li> Opitional login, probably with google docs or edmodo and a UI that lets teachers see specific student's highlights.
+
+</ul>
+I would love educators feedback on which of these should be a priority.
+
+<p>
+<div class="text-info">
+<i>contact:</i> Caroline Meeks, <a mailto="caroline@meekshome.com">caroline@meekshome.com</a>
+</div>
+</div>
+</div>
+</template>
